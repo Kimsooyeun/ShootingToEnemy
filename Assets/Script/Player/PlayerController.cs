@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -93,5 +92,10 @@ public class PlayerController : MonoBehaviour
     private void OnAttack(InputAction.CallbackContext context)
     {
         
+    }
+
+    public void OnDie()
+    {
+        gameObject.SetActive(false);
     }
 }

@@ -10,8 +10,11 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         rigid = GetComponent<Rigidbody>();
-        rigid.velocity = transform.forward * speed;
+    }
 
+    private void Start()
+    {
+        rigid.velocity = transform.forward * speed;
         Destroy(gameObject, 3f);
     }
 
@@ -22,7 +25,7 @@ public class Bullet : MonoBehaviour
             PlayerController player = other.GetComponent<PlayerController>();
             if(player != null)
             {
-                
+                player.OnDie();
             }
         }
     }
