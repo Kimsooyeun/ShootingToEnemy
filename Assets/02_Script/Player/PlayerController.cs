@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,7 +33,7 @@ public class PlayerController : MonoBehaviour
         //추후 InputSystem으로 바꿔야지.....................
 
 
-        //------GetAxis방식------------
+        /*//------GetAxis방식------------
          float xInput = Input.GetAxis("Horizontal");
         float zInput = Input.GetAxis("Vertical");
 
@@ -40,56 +41,56 @@ public class PlayerController : MonoBehaviour
         float zSpeed = zInput * speed;
 
         Vector3 newDir = new Vector3(xSpeed, 0f, zSpeed);
-        rigid.velocity = newDir;
+        rigid.velocity = newDir;*/
 
     }
 
-    /* private void FixedUpdate()
-     {
-         Move();
-     }
+    private void FixedUpdate()
+    {
+        Move();
+    }
 
-     private void OnEnable()
-     {
-         input.Player.Enable();
-         input.Player.Move.performed += OnPlayerMove;
-         input.Player.Move.canceled += OnPlayerMove;
-         input.Player.Attack.performed += OnAttack;
-         //input.Player.Rotate.performed += OnRotaion;
-     }
+    private void OnEnable()
+    {
+        input.Player.Enable();
+        input.Player.Move.performed += OnPlayerMove;
+        input.Player.Move.canceled += OnPlayerMove;
+        //input.Player.Attack.performed += OnAttack;
+        //input.Player.Rotate.performed += OnRotaion;
+    }
 
-     private void OnDisable()
-     {
-         input.Player.Disable();
-         input.Player.Move.performed -= OnPlayerMove;
-         input.Player.Move.canceled -= OnPlayerMove;
-         input.Player.Attack.performed -= OnAttack;
-         //input.Player.Rotate.performed -= OnRotaion;
-     }
+    private void OnDisable()
+    {
+        input.Player.Disable();
+        input.Player.Move.performed -= OnPlayerMove;
+        input.Player.Move.canceled -= OnPlayerMove;
+        //input.Player.Attack.performed -= OnAttack;
+        //input.Player.Rotate.performed -= OnRotaion;
+    }
 
-     private void OnPlayerMove(InputAction.CallbackContext context)
-     {
-         Vector3 vec3 = context.ReadValue<Vector2>();
-         inputDir.z = vec3.y;
-         inputDir.x = vec3.x;
-     }
+    private void OnPlayerMove(InputAction.CallbackContext context)
+    {
+        Vector3 vec3 = context.ReadValue<Vector2>();
+        inputDir.z = vec3.y;
+        inputDir.x = vec3.x;
+    }
 
-    *//* private void OnRotaion(InputAction.CallbackContext context)
-     {
-         mouseDelta = context.ReadValue<float>();
-     }*//*
+    private void OnRotaion(InputAction.CallbackContext context)
+    {
+        mouseDelta = context.ReadValue<float>();
+    }
 
-     private void Move()
-     {
-         v3 = new Vector3(0,mouseDelta,0);
-         mouseDelta = 0.0f;
+    private void Move()
+    {
+        v3 = new Vector3(0, mouseDelta, 0);
+        mouseDelta = 0.0f;
 
-         //transform.Rotate(v3 * turnSpeed);
+        //transform.Rotate(v3 * turnSpeed);
 
-         rigid.MovePosition(Time.fixedDeltaTime * speed * transform.TransformDirection(inputDir).normalized + transform.position);
-     }*/
+        rigid.MovePosition(Time.fixedDeltaTime * speed * transform.TransformDirection(inputDir).normalized + transform.position);
+    }
 
-    private void OnAttack(InputAction.CallbackContext context)
+    private void OnAttack()
     {
         
     }

@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : PoolObject
 {
-    public float speed = 8f;
+    private float speed = 4f;
     Rigidbody rigid;
+
+    public Action OnAttack;
 
     private void Awake()
     {
@@ -20,13 +23,9 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if(other.gameObject.CompareTag("Enemy"))
         {
-            PlayerController player = other.GetComponent<PlayerController>();
-            if(player != null)
-            {
-                player.OnDie();
-            }
+            OnAttack?.Invoke();
         }
     }
 }

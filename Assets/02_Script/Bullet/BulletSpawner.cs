@@ -8,7 +8,6 @@ public class BulletSpawner : MonoBehaviour
     float spawnRateMin = 0.5f;
     float spawnRateMax = 1f;
 
-    public Transform target;
     private float SpawnRate;
     private float timeAfterSpawn;
 
@@ -17,8 +16,6 @@ public class BulletSpawner : MonoBehaviour
     {
         timeAfterSpawn = 0f;
         SpawnRate = Random.Range(spawnRateMin, spawnRateMax);
-        PlayerController player = FindObjectOfType<PlayerController>();
-        target = player.transform;
     }
 
     private void Update()
@@ -28,7 +25,6 @@ public class BulletSpawner : MonoBehaviour
         {
             timeAfterSpawn = 0f;
             GameObject bullet = Instantiate(bulletPrefeb, transform.position,transform.rotation);
-            bullet.transform.LookAt(target);
 
             SpawnRate = Random.Range(spawnRateMin,spawnRateMax);
         }
