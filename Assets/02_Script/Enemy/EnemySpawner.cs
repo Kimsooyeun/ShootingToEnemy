@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : Spawner
 {
-    public GameObject EnemyBase;
+    /*public GameObject EnemyBase;
     float spawnRateMin = 0.5f;
     float spawnRateMax = 1f;
 
@@ -32,5 +32,16 @@ public class EnemySpawner : MonoBehaviour
 
             SpawnRate = Random.Range(spawnRateMin, spawnRateMax);
         }
+    }*/
+
+    protected override void OnSpawn(EnemyBase enemy)
+    {
+        Fighter fighter = enemy as Fighter;
+        if (fighter != null) 
+        {
+            float r = Random.Range(min, max);
+            fighter.Base = transform.position.x + r;
+        }
+
     }
 }

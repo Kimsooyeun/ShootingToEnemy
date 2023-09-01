@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyBase : PoolObject
 {
-    private int EnemyHp = 5;
+    /*private int EnemyHp = 5;
     private float speed = 4f;
     public Transform player;
     private PlayerController playerBase;
@@ -45,15 +46,56 @@ public class EnemyBase : PoolObject
         // 이동 방향으로 이동
         transform.position += normalizedMoveDirection * speed * Time.deltaTime;
     }
+    }*/
 
-    private void OnAttacted()
+    /*public int maxHitPoint = 1;
+    public float moveSpeed = 3.0f;
+    public int score = 10;
+
+    private int hitpoint = 1;*/
+    PlayerController player;
+
+    public PlayerController TargetPlayer
     {
-        EnemyHp--;
-
-        if(EnemyHp < 1)
+        protected get => player;
+        set
         {
-            Destroy(gameObject);
+            if (player == null)
+                player = value;
         }
     }
 
+    protected virtual void OnEnable()
+    {
+        /*hitpoint = maxHitPoint;*/
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            Attacked();
+        }
+    }
+
+    protected virtual void Attacked()
+    {
+    }
+
+    protected virtual void OnHit()
+    {
+    }
+
+    protected void Crush()
+    {
+            /*GameObject obj = Factory.Inst.GetObject(destroyEffect);
+            obj.transform.position = transform.position;*/
+
+            gameObject.SetActive(false);    // 비활성화 
+    }
+
+    /*protected virtual void OnCrush()
+    {
+        player?.AddScore(score);
+    }*/
 }

@@ -8,24 +8,26 @@ public class Bullet : PoolObject
     private float speed = 4f;
     Rigidbody rigid;
 
-    public Action OnAttack;
-
     private void Awake()
     {
         rigid = GetComponent<Rigidbody>();
     }
 
+    private void OnEnable()
+    {
+        StartCoroutine(LifeOver(5.0f));
+    }
+
     private void Start()
     {
         rigid.velocity = transform.forward * speed;
-        Destroy(gameObject, 3f);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if(other.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            OnAttack?.Invoke();
+            StartCoroutine(LifeOver(0.0f));
         }
     }
 }

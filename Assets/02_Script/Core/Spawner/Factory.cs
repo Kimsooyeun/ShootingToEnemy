@@ -32,7 +32,7 @@ public class Factory : Singleton<Factory>
             case PoolObjectType.Bullet:
                 result = GetBullet().gameObject;
                 break;
-                case PoolObjectType.Enemy:
+            case PoolObjectType.Enemy:
                 result = GetEnemy().gameObject;
                 break;
         }
@@ -40,6 +40,6 @@ public class Factory : Singleton<Factory>
         return result;
     }
 
-    public Bullet GetBullet() => bulletPool.GetObject();
-    public EnemyBase GetEnemy() => enemyPool.GetObject();
+    public Bullet GetBullet() => bulletPool?.GetObject();
+    public EnemyBase GetEnemy() => enemyPool?.GetObject();
 }

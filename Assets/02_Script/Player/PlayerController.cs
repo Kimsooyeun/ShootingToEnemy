@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 inputDir = Vector3.zero;
     private Vector3 v3;
 
+    public PoolObjectType bulletType;
+
     [Header("ÄÄÆ÷³ÍÆ®")]
     private PlayerInputAction input;
     private Rigidbody rigid;
@@ -24,6 +26,11 @@ public class PlayerController : MonoBehaviour
     {
         input = new PlayerInputAction();
         rigid = GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(AttackCorutine());
     }
 
     private void Update()
@@ -90,9 +97,17 @@ public class PlayerController : MonoBehaviour
         rigid.MovePosition(Time.fixedDeltaTime * speed * transform.TransformDirection(inputDir).normalized + transform.position);
     }
 
-    private void OnAttack()
+    IEnumerator AttackCorutine()
     {
-        
+        while (true)
+        {
+            GameObject obj = Factory.Inst.GetObject(bulletType);
+            Transform firePos = transform.GetChild(0);
+            obj.transform.position = firePos.position;
+            obj.transform.rotation = firePos.rotation;
+
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     public void OnDie()
