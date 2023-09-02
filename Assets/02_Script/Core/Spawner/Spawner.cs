@@ -5,8 +5,8 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public PoolObjectType objectType;
-    public float min = 5.0f;
-    public float max = 10.0f;
+    public float min = -9.0f;
+    public float max = 9.0f;
     public float interval = 1.0f;
     protected PlayerController player = null;
 

@@ -40,7 +40,8 @@ public class EnemySpawner : Spawner
         if (fighter != null) 
         {
             float r = Random.Range(min, max);
-            fighter.Base = transform.position.x + r;
+
+            fighter.transform.position = new Vector3(r, fighter.transform.position.y, fighter.transform.position.z);
         }
 
     }

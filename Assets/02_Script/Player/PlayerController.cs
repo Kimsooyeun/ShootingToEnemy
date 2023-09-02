@@ -43,17 +43,18 @@ public class PlayerController : MonoBehaviour
         rigid.velocity = newDir;
 
 
-        if (scanner.nearestTarget)
+        if (!scanner.nearestTarget)
+        {
+
+            rotate = Quaternion.identity;
+        }
+        else
         {
             Vector3 targetPos = scanner.nearestTarget.position;
             Vector3 dir = targetPos - firePos.position;
             dir = dir.normalized; // ¡§±‘»≠
 
             rotate = Quaternion.LookRotation(dir);
-        }
-        else
-        {
-            rotate = Quaternion.Euler(0f, 0f, 0f);
         }
     }
 
@@ -63,7 +64,7 @@ public class PlayerController : MonoBehaviour
     {
         while (true)
         {
-            GameObject obj = Factory.Inst.GetObject(bulletType);
+                GameObject obj = Factory.Inst.GetObject(bulletType);
                 obj.transform.position = transform.position;
                 obj.transform.rotation = rotate;
 

@@ -5,16 +5,23 @@ using UnityEngine;
 
 public class Fighter : EnemyBase
 {
-    public int maxHitPoint = 3;
-    private int hitPoint = 3;
+    public int maxHitPoint = 1;
+
+    [SerializeField]
+    private int hitPoint = 1;
     private float speed = 4f;
     public float frequency = 1;
+
+    [Range(0.1f, 3.0f)]
+    public float amplitude = 1;
+
     private PlayerController playerBase;
 
-    float baseX;
-    public float Base
+    Rigidbody rigid;
+
+    private void Awake()
     {
-        set => baseX = value;
+        rigid = GetComponent<Rigidbody>();
     }
 
     private void Start()
@@ -22,16 +29,19 @@ public class Fighter : EnemyBase
         playerBase =FindObjectOfType<PlayerController>();
     }
 
+    protected override void OnEnable()
+    {
+        transform.localPosition = Vector3.zero;
+    }
+
     private void Update()
     {
         // 플레이어와 적의 위치 차이 벡터 계산
-        Vector3 moveDirection = playerBase.transform.position - transform.position;
+        Vector3 dirVec = playerBase.transform.position - transform.position;
+        Vector3 nextVec = dirVec.normalized * speed * Time.deltaTime;
+        rigid.MovePosition(rigid.position + nextVec);
+        rigid.velocity = Vector3.zero;
 
-        // 벡터를 정규화하여 이동 방향 설정
-        Vector3 normalizedMoveDirection = moveDirection.normalized;
-
-        // 이동 방향으로 이동
-        transform.position += normalizedMoveDirection * speed * Time.deltaTime;
         transform.LookAt(playerBase.transform);
     }
 
@@ -42,6 +52,7 @@ public class Fighter : EnemyBase
         if (hitPoint < 1)
         {
             Crush();
+            hitPoint = maxHitPoint;
         }
     }
 

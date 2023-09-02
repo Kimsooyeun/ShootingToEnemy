@@ -70,18 +70,19 @@ public class EnemyBase : PoolObject
         /*hitpoint = maxHitPoint;*/
     }
 
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
             Attacked();
         }
-    }
+    }*/
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
+            Debug.Log("Ãæµ¹");
             Attacked();
         }
     }

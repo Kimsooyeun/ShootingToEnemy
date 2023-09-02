@@ -20,16 +20,21 @@ public class Bullet : PoolObject
 
     private void Start()
     {
-        rigid.velocity = transform.forward * speed;
+        //rigid.velocity = transform.forward * speed;
     }
 
-   /* private void OnCollisionEnter(Collision collision)
+    /* private void OnCollisionEnter(Collision collision)
+     {
+         if (collision.gameObject.CompareTag("Enemy"))
+         {
+             StartCoroutine(LifeOver(0.0f));
+         }
+     }*/
+
+    private void FixedUpdate()
     {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            StartCoroutine(LifeOver(0.0f));
-        }
-    }*/
+        transform.position += Time.deltaTime * speed * transform.forward;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
