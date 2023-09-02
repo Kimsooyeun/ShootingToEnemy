@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Bullet : PoolObject
 {
-    private float speed = 4f;
+    public float speed = 4f;
     Rigidbody rigid;
 
     private void Awake()
@@ -23,9 +23,17 @@ public class Bullet : PoolObject
         rigid.velocity = transform.forward * speed;
     }
 
-    private void OnCollisionEnter(Collision collision)
+   /* private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
+        {
+            StartCoroutine(LifeOver(0.0f));
+        }
+    }*/
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
         {
             StartCoroutine(LifeOver(0.0f));
         }

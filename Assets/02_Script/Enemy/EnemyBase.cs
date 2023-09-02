@@ -78,6 +78,14 @@ public class EnemyBase : PoolObject
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Bullet"))
+        {
+            Attacked();
+        }
+    }
+
     protected virtual void Attacked()
     {
     }

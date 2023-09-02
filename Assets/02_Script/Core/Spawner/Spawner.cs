@@ -22,7 +22,7 @@ public class Spawner : MonoBehaviour
         {
             yield return new WaitForSeconds(interval);  // 인터벌만큼 대기
 
-            // 생성하고 생성한 오브젝트를 스포너의 자식으로 만들기
+            //생성한 오브젝트를 스포너의 자식으로 만들기
             GameObject obj = Factory.Inst.GetObject(objectType);
 
             // 생성한 게임오브젝트에서 EnemyBase 컴포넌트 가져오기
