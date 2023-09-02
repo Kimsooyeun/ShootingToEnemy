@@ -6,11 +6,9 @@ using UnityEngine;
 public class Bullet : PoolObject
 {
     public float speed = 4f;
-    Rigidbody rigid;
 
     private void Awake()
     {
-        rigid = GetComponent<Rigidbody>();
     }
 
     private void OnEnable()

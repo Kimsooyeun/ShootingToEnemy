@@ -352,7 +352,7 @@ GameObject:
   m_Component:
   - component: {fileID: 257021952}
   m_Layer: 5
-  m_Name: GameScoreCanvas
+  m_Name: ScoreBoard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -560,7 +560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originalPrefab: {fileID: 243543127712699602, guid: fd9354c2176066742a287a93f9247d4e, type: 3}
-  poolSize: 16
+  poolSize: 4
 --- !u!1 &502657307
 GameObject:
   m_ObjectHideFlags: 0
@@ -1287,6 +1287,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1607813449}
   - component: {fileID: 1607813450}
+  - component: {fileID: 1607813451}
   m_Layer: 5
   m_Name: Score
   m_TagString: Untagged
@@ -1342,6 +1343,19 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1607813451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607813448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba7520303b636e94db656269e71c9784, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minScoreUpSpeed: 50
 --- !u!1 &1719508552
 GameObject:
   m_ObjectHideFlags: 0
@@ -1840,21 +1854,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1912479321121406329, guid: 423de2e4c5893ff49b718eac0bd94423, type: 3}
-      propertyPath: scanRange
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2637309715411929629, guid: 423de2e4c5893ff49b718eac0bd94423, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 5161367033058247274, guid: 423de2e4c5893ff49b718eac0bd94423, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5161367033058247274, guid: 423de2e4c5893ff49b718eac0bd94423, type: 3}
-      propertyPath: m_Layer
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5161367033058247575, guid: 423de2e4c5893ff49b718eac0bd94423, type: 3}
       propertyPath: m_RootOrder

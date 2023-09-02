@@ -5,10 +5,8 @@ using UnityEngine;
 
 public class Fighter : EnemyBase
 {
-    public int maxHitPoint = 1;
 
     [SerializeField]
-    private int hitPoint = 1;
     private float speed = 4f;
     public float frequency = 1;
 
@@ -26,11 +24,13 @@ public class Fighter : EnemyBase
 
     private void Start()
     {
+        score = 20;
         playerBase =FindObjectOfType<PlayerController>();
     }
 
     protected override void OnEnable()
     {
+        base.OnEnable();
         transform.localPosition = Vector3.zero;
     }
 
@@ -43,21 +43,5 @@ public class Fighter : EnemyBase
         rigid.velocity = Vector3.zero;
 
         transform.LookAt(playerBase.transform);
-    }
-
-    protected override void Attacked()
-    {
-        hitPoint--;
-        OnHit();
-        if (hitPoint < 1)
-        {
-            Crush();
-            hitPoint = maxHitPoint;
-        }
-    }
-
-    protected override void OnHit()
-    {
-        base.OnHit();
     }
 }

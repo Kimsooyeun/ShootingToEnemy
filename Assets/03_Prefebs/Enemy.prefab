@@ -128,7 +128,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1422dda1d8d991146a3809bce3036ef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 30
   maxHitPoint: 1
   hitPoint: 1
+  player: {fileID: 5161367033058247275, guid: 423de2e4c5893ff49b718eac0bd94423, type: 3}
+  speed: 4
   frequency: 1
   amplitude: 3

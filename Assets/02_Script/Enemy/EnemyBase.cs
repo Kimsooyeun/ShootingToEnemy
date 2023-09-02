@@ -6,89 +6,41 @@ using UnityEngine;
 
 public class EnemyBase : PoolObject
 {
-    /*private int EnemyHp = 5;
-    private float speed = 4f;
-    public Transform player;
-    private PlayerController playerBase;
-    Rigidbody rigid;
-
-    Bullet bullet;
-    private void Awake()
-    {
-        playerBase = FindObjectOfType<PlayerController>();
-        rigid = GetComponent<Rigidbody>();
-        bullet = FindObjectOfType<Bullet>();
-    }
-
-    private void Start()
-    {
-        player = playerBase.transform;
-    }
-
-    private void OnEnable()
-    {
-        bullet.OnAttack += OnAttacted;
-    }
-
-    private void OnDisable()
-    {
-        bullet.OnAttack -= OnAttacted;
-    }
-
-    private void Update()
-    {
-        // 플레이어와 적의 위치 차이 벡터 계산
-        Vector3 moveDirection = player.position - transform.position;
-
-        // 벡터를 정규화하여 이동 방향 설정
-        Vector3 normalizedMoveDirection = moveDirection.normalized;
-
-        // 이동 방향으로 이동
-        transform.position += normalizedMoveDirection * speed * Time.deltaTime;
-    }
-    }*/
-
-    /*public int maxHitPoint = 1;
-    public float moveSpeed = 3.0f;
     public int score = 10;
+    public int maxHitPoint = 1;
+    [SerializeField]
+    public int hitPoint = 1;
+    [SerializeField]
+    protected PlayerController player;
+    bool isCrushed = false;
 
-    private int hitpoint = 1;*/
-    PlayerController player;
-
-    public PlayerController TargetPlayer
+    protected void Start()
     {
-        protected get => player;
-        set
-        {
-            if (player == null)
-                player = value;
-        }
+        player = FindObjectOfType<PlayerController>();
     }
 
     protected virtual void OnEnable()
     {
-        /*hitpoint = maxHitPoint;*/
+        isCrushed = false;
+        hitPoint = maxHitPoint;
     }
-
-    /*private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Bullet"))
-        {
-            Attacked();
-        }
-    }*/
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
-            Debug.Log("충돌");
             Attacked();
         }
     }
 
     protected virtual void Attacked()
     {
+        hitPoint--;
+        OnHit();
+        if (hitPoint < 1)
+        {
+            Crush();
+        }
     }
 
     protected virtual void OnHit()
@@ -97,14 +49,18 @@ public class EnemyBase : PoolObject
 
     protected void Crush()
     {
-            /*GameObject obj = Factory.Inst.GetObject(destroyEffect);
-            obj.transform.position = transform.position;*/
+        if (!isCrushed)
+        {
+            isCrushed = true;          
+            OnCrush();
 
-            gameObject.SetActive(false);    // 비활성화 
+            gameObject.SetActive(false);
+        }
     }
 
-    /*protected virtual void OnCrush()
+    protected virtual void OnCrush()
     {
-        player?.AddScore(score);
-    }*/
+        
+        player.AddScore(score);
+    }
 }
