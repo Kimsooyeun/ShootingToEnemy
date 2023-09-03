@@ -17,14 +17,15 @@ public class Fighter : EnemyBase
 
     Rigidbody rigid;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         rigid = GetComponent<Rigidbody>();
     }
 
     private void Start()
     {
-        score = 20;
+        score = 5;
         playerBase =FindObjectOfType<PlayerController>();
     }
 

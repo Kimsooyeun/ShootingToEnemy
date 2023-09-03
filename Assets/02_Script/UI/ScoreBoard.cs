@@ -3,44 +3,45 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreBoard : MonoBehaviour
 {
+    [SerializeField]
     float currentscore = 0;
-    int nowScore = 0; 
-    TextMeshProUGUI score;
-
-    PlayerController player;
+    TextMeshProUGUI textScore;
+    public int score = 0;
     public float minScoreUpSpeed = 50.0f;
     private void Awake()
     {
         Transform child = transform.GetChild(1);
-        score = child.GetComponent<TextMeshProUGUI>();
+        textScore = child.GetComponent<TextMeshProUGUI>();
     }
 
     private void Start()
     {
-        player = FindObjectOfType<PlayerController>();
-        player.onScoreChange += ScoreUpdate;
-        score.text = currentscore.ToString();
+        textScore.text = currentscore.ToString();
     }
 
     private void Update()
     {
-        if(currentscore < nowScore) 
+        Debug.Log("score " + score + ", cur " + currentscore);
+
+        //abcd += 1;
+        if (currentscore < score) 
         {
-            float speed = Mathf.Max((nowScore - currentscore) * 5.0f, minScoreUpSpeed);
+            float speed = Mathf.Max((score - currentscore) * 5.0f, minScoreUpSpeed);
+            currentscore = Mathf.Min(currentscore, score);
             currentscore += Time.deltaTime * speed;
 
-            currentscore = Mathf.Min(currentscore, nowScore);
-            score.text = $"{currentscore:f0}";
+            textScore.text = $"{currentscore:f0}";
+
+            //Debug.Log(score);
         }
     }
 
-    private void ScoreUpdate(int newScore)
+    public void AddScore(int plus)
     {
-
-        Debug.Log("점수증가");
-        nowScore = newScore;
+        score += plus;
     }
 }

@@ -10,13 +10,12 @@ public class EnemyBase : PoolObject
     public int maxHitPoint = 1;
     [SerializeField]
     public int hitPoint = 1;
-    [SerializeField]
-    protected PlayerController player;
+    protected ScoreBoard scoreBoard;
     bool isCrushed = false;
 
-    protected void Start()
+    protected virtual void Awake()
     {
-        player = FindObjectOfType<PlayerController>();
+        scoreBoard = FindObjectOfType<ScoreBoard>();
     }
 
     protected virtual void OnEnable()
@@ -25,7 +24,7 @@ public class EnemyBase : PoolObject
         hitPoint = maxHitPoint;
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
@@ -60,7 +59,6 @@ public class EnemyBase : PoolObject
 
     protected virtual void OnCrush()
     {
-        
-        player.AddScore(score);
+        scoreBoard.AddScore(score);
     }
 }

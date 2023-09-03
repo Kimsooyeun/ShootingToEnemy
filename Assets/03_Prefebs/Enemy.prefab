@@ -131,7 +131,7 @@ MonoBehaviour:
   score: 30
   maxHitPoint: 1
   hitPoint: 1
-  player: {fileID: 5161367033058247275, guid: 423de2e4c5893ff49b718eac0bd94423, type: 3}
+  scoreBoard: {fileID: 4802839760536762557, guid: 486372f16ae014d4b8733ebba595b103, type: 3}
   speed: 4
   frequency: 1
   amplitude: 3

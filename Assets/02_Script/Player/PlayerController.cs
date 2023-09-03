@@ -19,21 +19,6 @@ public class PlayerController : MonoBehaviour
     Quaternion rotate;
     Transform firePos;
 
-    [Header("UI")]
-    private int score = 0;
-    public Action<int> onScoreChange;
-    public int Score
-    {
-        get => score;
-        
-        set
-        {
-            Debug.Log("점수바꾼당");
-            score = value;
-            onScoreChange?.Invoke(score);
-        }
-    }
-
 
     private void Awake()
     {
@@ -84,14 +69,6 @@ public class PlayerController : MonoBehaviour
 
             yield return new WaitForSeconds(0.5f);
         }
-    }
-
-    public void AddScore(int plus)
-    {
-        Debug.Log("추가 점수");
-        Score += plus;
-
-        Debug.Log(Score);
     }
 
     public void OnDie()
