@@ -7,25 +7,26 @@ public class Fighter : EnemyBase
 {
 
     [SerializeField]
-    private float speed = 4f;
+    private float speed = 3f;
     public float frequency = 1;
 
     [Range(0.1f, 3.0f)]
     public float amplitude = 1;
 
     private PlayerController playerBase;
-
     Rigidbody rigid;
 
     protected override void Awake()
     {
         base.Awake();
         rigid = GetComponent<Rigidbody>();
+        score = 5;
+        hitPoint = 2;
+        maxHitPoint = 2;
     }
 
     private void Start()
     {
-        score = 5;
         playerBase =FindObjectOfType<PlayerController>();
     }
 
@@ -33,9 +34,10 @@ public class Fighter : EnemyBase
     {
         base.OnEnable();
         transform.localPosition = Vector3.zero;
+        rigid.velocity = Vector3.zero;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         // 플레이어와 적의 위치 차이 벡터 계산
         Vector3 dirVec = playerBase.transform.position - transform.position;

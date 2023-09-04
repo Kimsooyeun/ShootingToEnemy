@@ -2,12 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("플레이어 데이터")]
-    public float speed = 8.0f;
+    public float speed = 6.0f;
+    public Vector3 inputVec;
     public float turnSpeed = 1.0f;
     int hp = 5;
 
@@ -32,17 +32,10 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(AttackCorutine());
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        float xInput = Input.GetAxis("Horizontal");
-        float zInput = Input.GetAxis("Vertical");
-
-        float xSpeed = xInput * speed;
-        float zSpeed = zInput * speed;
-
-        Vector3 newDir = new Vector3(xSpeed, 0f, zSpeed);
-        rigid.velocity = newDir;
-
+        inputVec.x = Input.GetAxisRaw("Horizontal");
+        inputVec.z = Input.GetAxisRaw("Vertical");
 
         if (!scanner.nearestTarget)
         {
@@ -57,6 +50,12 @@ public class PlayerController : MonoBehaviour
 
             rotate = Quaternion.LookRotation(dir);
         }
+    }
+
+    private void FixedUpdate()
+    {
+        Vector3 nextVec = inputVec.normalized * speed * Time.fixedDeltaTime;
+        rigid.MovePosition(rigid.position + nextVec);
     }
 
     IEnumerator AttackCorutine()

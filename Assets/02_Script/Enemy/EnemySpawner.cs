@@ -41,7 +41,7 @@ public class EnemySpawner : Spawner
         {
             float r = Random.Range(min, max);
 
-            fighter.transform.position = new Vector3(r, fighter.transform.position.y, fighter.transform.position.z);
+            //fighter.transform.position = new Vector3(r, fighter.transform.position.y, fighter.transform.position.z);
         }
 
     }

@@ -9,11 +9,17 @@ public class Spawner : MonoBehaviour
     public float max = 9.0f;
     public float interval = 1.0f;
     protected PlayerController player = null;
+    public Transform[] spawnPoint;
 
-    private void Start()
+    protected void Start()
+    {
+        StartCoroutine(Spawn());
+    }
+
+    protected void Awake()
     {
         player = FindObjectOfType<PlayerController>();
-        StartCoroutine(Spawn());
+        spawnPoint = player.transform.GetChild(2).GetComponentsInChildren<Transform>();
     }
 
     private IEnumerator Spawn()
@@ -27,8 +33,8 @@ public class Spawner : MonoBehaviour
 
             // 생성한 게임오브젝트에서 EnemyBase 컴포넌트 가져오기
             EnemyBase enemy = obj.GetComponent<EnemyBase>();
-            enemy.transform.position = transform.position;  // 스포너 위치로 이동
-
+            enemy.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
+            Debug.Log("enemy :" + enemy.transform.position + "/ transform : " + transform.position);
             // 상속 받은 클래스별 별도 처리
             OnSpawn(enemy);
         }
@@ -37,7 +43,8 @@ public class Spawner : MonoBehaviour
     protected virtual void OnSpawn(EnemyBase enemy)
     {
         float r = Random.Range(min, max);
-        enemy.transform.Translate(Vector3.left * r);
+        //enemy.transform.Translate(Vector3.left * r);
+        Debug.Log("enemy OnSpawn:" + enemy.transform.position);
     }
 
     virtual protected void OnDrawGizmos()

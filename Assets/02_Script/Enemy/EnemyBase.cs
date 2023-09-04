@@ -6,10 +6,9 @@ using UnityEngine;
 
 public class EnemyBase : PoolObject
 {
-    public int score = 10;
+    protected int score = 10;
     public int maxHitPoint = 1;
-    [SerializeField]
-    public int hitPoint = 1;
+    protected int hitPoint = 1;
     protected ScoreBoard scoreBoard;
     bool isCrushed = false;
 
