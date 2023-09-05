@@ -33,14 +33,15 @@ public class Spawner : MonoBehaviour
 
             // 생성한 게임오브젝트에서 EnemyBase 컴포넌트 가져오기
             EnemyBase enemy = obj.GetComponent<EnemyBase>();
+            EnemyBase enemy2 = obj.GetComponent<EnemyBase>();
             enemy.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
-            Debug.Log("enemy :" + enemy.transform.position + "/ transform : " + transform.position);
+            enemy2.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
             // 상속 받은 클래스별 별도 처리
-            OnSpawn(enemy);
+            OnSpawn(enemy, enemy2);
         }
     }
 
-    protected virtual void OnSpawn(EnemyBase enemy)
+    protected virtual void OnSpawn(EnemyBase enemy, EnemyBase enemy2)
     {
         float r = Random.Range(min, max);
         //enemy.transform.Translate(Vector3.left * r);

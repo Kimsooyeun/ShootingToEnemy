@@ -10,7 +10,7 @@ public class EnemyBase : PoolObject
     public int maxHitPoint = 1;
     protected int hitPoint = 1;
     protected ScoreBoard scoreBoard;
-    bool isCrushed = false;
+    protected bool isCrushed = false;
 
     protected virtual void Awake()
     {

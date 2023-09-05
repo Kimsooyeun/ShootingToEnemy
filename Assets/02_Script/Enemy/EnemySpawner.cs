@@ -2,42 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class EnemySpawner : Spawner
 {
-    /*public GameObject EnemyBase;
-    float spawnRateMin = 0.5f;
-    float spawnRateMax = 1f;
-
-    public Transform target;
-    private float SpawnRate;
-    private float timeAfterSpawn;
-
-
-    private void Start()
-    {
-        timeAfterSpawn = 0f;
-        SpawnRate = Random.Range(spawnRateMin, spawnRateMax);
-        PlayerController player = FindObjectOfType<PlayerController>();
-        target = player.transform;
-    }
-
-    private void Update()
-    {
-        timeAfterSpawn += Time.deltaTime;
-        if (timeAfterSpawn >= SpawnRate)
-        {
-            timeAfterSpawn = 0f;
-            GameObject Enemy = Instantiate(EnemyBase, transform.position, transform.rotation);
-            Enemy.transform.LookAt(target);
-
-            SpawnRate = Random.Range(spawnRateMin, spawnRateMax);
-        }
-    }*/
-
-    protected override void OnSpawn(EnemyBase enemy)
+    protected override void OnSpawn(EnemyBase enemy, EnemyBase enemy2)
     {
         Fighter fighter = enemy as Fighter;
+        Fighter2 fighter2 = enemy as Fighter2;
         if (fighter != null) 
+        {
+            float r = Random.Range(min, max);
+
+            //fighter.transform.position = new Vector3(r, fighter.transform.position.y, fighter.transform.position.z);
+        }
+        if (fighter2 != null)
         {
             float r = Random.Range(min, max);
 
